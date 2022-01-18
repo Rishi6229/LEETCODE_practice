@@ -1,0 +1,54 @@
+//buy and sell stock with a given fees that has to be paid.
+	//given stock prices 
+	//find the maximum profit that can be obtained by buying and selling stock
+	//no infinite transaction allowed.
+  static int buyandsellstock(int[]prices , int n , int fees)
+  {
+	  //variable to show the old bought state profit.
+	  int obsp = prices[0];
+	  
+	  //variable to show the new bought state profit.
+	  int ossp = 0;
+	  
+	  //we iterate the price array to check if the new profit is better than the new one or not.
+	  
+	  for(int i=0; i<n; i++)
+	  {
+		  int nssp =0;
+		  //variable to check the new sold state profit.
+		  
+		  int nbsp = 0;
+		  //variable to check the new bought state profit.
+		  
+		  //if the old bought selling profit - price at the ith day is better than the old bought selling  profit we update the new bought selling profit.
+		  if(obsp - prices[i] > obsp)
+		  {
+			  nbsp = obsp - prices[i];
+		  }
+		  else {
+			  //else the new bought state profit remains the same.
+			  nbsp = obsp;
+		  }
+		  
+		  
+		  //if the net new profit is better than the old selling state profit 
+		  //we update the new sell state profit
+		  if(obsp + prices[i] - fees > ossp)
+		  {
+			  nssp = obsp + prices[i]-fees;
+		  }
+		  else {
+			  nssp = ossp;
+			  
+		  }
+		  //we updat the old sold state profit to new sold state profit'
+		  //we also update the old bought state profit to new bought state profit
+		  obsp = nbsp;
+		  ossp = nssp;
+		  
+	  }
+
+	  return ossp;
+
+	  
+  }
