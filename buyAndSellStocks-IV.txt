@@ -1,0 +1,79 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        int n = prices.length;
+        
+        int op = 0;
+        //we assign the dp left array to calculate the overall profit if the stock was sold today or day before.
+        
+        int[]dpleft = new int[n];
+        
+        //we assign the variable to store the maximum profit.
+        int maxProf = 0;
+        
+        //we assign the variable to store the minimum price to be stored.
+        int minPrice = prices[0];
+        
+        for(int i = 1; i<n; i++)
+        {
+          //if prices[i] is less than the minmum price we update the maximum price.
+           if(prices[i] < minPrice)
+               minPrice = prices[i];
+            
+            
+            maxProf = prices[i] - minPrice;
+            //if the maximum profit is greater than the value stored at dp[i - 1] we assign dp[i - 1] to maximum profit.
+            
+            if(maxProf > dpleft[i - 1])
+                dpleft[i] = maxProf;
+            else
+                dpleft[i] =  dpleft[i - 1];
+        }
+        
+        
+        //we assign the dpright array to store the values if the stocks were sold today or a day after that day.
+        int[]dpright = new int[n];
+        //we assign the minProf variable to store the minimum profit stored after the selling the stock on or after the ith day.
+        int minProf = 0;
+        
+        //we assign the maxPrice varible to store the maximum price discovered till the ith day.
+        int maxPrice = prices[n - 1];
+        
+        
+        for(int i = n - 2; i>=0; i--)
+        {
+         //if prices at ith day is greater than the maximum price then we change the maximum price to the ith price   
+            if(maxPrice < prices[i])
+            {
+                maxPrice = prices[i];
+            }
+            
+            minProf = maxPrice - prices[i];
+            //if the profit is greater than the profit stored at the dpright array.
+            //we change the dp right array to the new profit found.
+            if(minProf > dpright[i+1])
+            {
+                dpright[i] = minProf;
+            }
+            else{
+                dpright[i] = dpright[i+1];
+            }
+            
+            
+        }
+        //we find the maximum profit found till now.
+        
+        for(int i = 0; i<n; i++)
+        {
+            if(dpleft[i]+dpright[i] > op)
+                op = dpleft[i]+dpright[i];
+        }
+        
+        return op;
+        
+        
+        
+        
+        
+        
+    }
+}
