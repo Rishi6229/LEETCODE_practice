@@ -1,0 +1,40 @@
+public int[] rearrangeArray(int[] nums) 
+    
+    {
+        int n = nums.length;
+        int[]ans = new int[n];
+        int newLength = n/2;
+        
+        int[]posArray = new int[newLength];
+        int[]negArray = new int[newLength];
+        
+        int index1 = 0;
+        int index2 = 0;
+        
+        for(int i =0; i<n; i++)
+        {
+            if(nums[i] >= 0)
+            {
+                posArray[index1++] = nums[i];
+            }
+            else{
+                negArray[index2++] = nums[i];
+            }
+        }
+        
+        index1 = 0;
+        int positiveIndex = 0;
+        int negativeIndex = 0;
+        
+      for(int i = 0; i<n; i++)
+      {
+          if(i % 2 == 0)
+              ans[index1++] = posArray[positiveIndex++];
+          else
+              ans[index1++] = negArray[negativeIndex++];
+      }
+        
+        return ans;
+        
+        
+    }
