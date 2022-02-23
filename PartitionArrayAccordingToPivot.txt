@@ -1,0 +1,59 @@
+class Solution {
+    public int[] pivotArray(int[] nums, int pivot) {
+        int n = nums.length;
+        int[]ans = new int[n];
+        
+        //The intution is to divide the arrays into two halves.
+        //one half would store the elements that are smaller than the pivot.
+         //for elements that are equal to the pivot elements we traverse the arrays once again before the right traversal
+        //and store the elements in the list.
+        //the other half stores the elements that are greater then the pivot.
+       
+        
+        List<Integer>leftList = new ArrayList<>();
+        for(int a: nums)
+        {
+            if(a < pivot)
+            {
+                leftList.add(a);
+            }
+        }
+        
+        
+        List<Integer>rightList = new ArrayList<>();
+        for(int a: nums)
+        {
+            if(a == pivot)
+            {
+                rightList.add(a);
+            }
+        }
+        
+        for(int a: nums)
+        {
+            if(a > pivot)
+            {
+                rightList.add(a);
+            }
+        }
+        
+        
+        int idx = 0;
+        for(int i =0; i<leftList.size(); i++)
+        {
+            ans[idx++] = leftList.get(i);
+        }
+        
+        for(int i = 0; i < rightList.size(); i++)
+        {
+            ans[idx++] = rightList.get(i);
+        }
+        
+        return ans;
+        
+        
+        
+        
+        
+    }
+}
