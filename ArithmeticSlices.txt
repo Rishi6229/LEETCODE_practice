@@ -1,0 +1,24 @@
+class Solution {
+    public int numberOfArithmeticSlices(int[] nums) {
+        int n  = nums.length;
+        int diff = 0 , currCnt = 0 , res = 0;
+        for(int i = 1; i<n; i++)
+        {
+            if(nums[i] - nums[i-1] == diff)
+            {
+                currCnt++;
+            
+            if(currCnt >= 2)
+                res += (currCnt - 1);
+            }
+            else
+            {
+                diff = nums[i] - nums[i - 1];
+                currCnt = 1;
+            }
+        }
+        
+        return res;
+        
+    }
+}
